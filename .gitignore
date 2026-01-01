@@ -1,0 +1,5 @@
+# Stores songs from dataset into JSON
+AllSongs.json
+
+node_modules/
+.pnp.*
