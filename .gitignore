@@ -4,6 +4,7 @@ AllSongs.json
 node_modules/
 .pnp.*
 venv/
+.env
 
 # Logs
 logs
