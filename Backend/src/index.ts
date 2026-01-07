@@ -1,13 +1,11 @@
 import express,{ Application } from "express"
-import song, {Song} from "./RandomSongPicker.js"
+import router from "./routes/getSongRoute.js";
 
 const app: Application = express()
 
-const PORT:number = 8000;
+const PORT:number = 8080;
 
-app.get("/", (req,res) => {
-    res.send(song);
-    })
+app.use("/",router);
 
 app.listen(PORT,():void =>{
     console.log(`Express App started at port ${PORT}`)
