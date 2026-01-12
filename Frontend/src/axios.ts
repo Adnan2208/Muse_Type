@@ -1,5 +1,5 @@
 import axios from "axios";
-axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL+ import.meta.env.VITE_PORT || "hola"
+axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL+ import.meta.env.VITE_PORT || "http://localhost:8080"
 
 export type Song = {
     Title : string,
