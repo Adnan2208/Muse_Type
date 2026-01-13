@@ -3,8 +3,7 @@ import getSong from "../controller/getSongController.js"
 const router : Router = Router();
 
 router.get("/", (req,res)=> {
-    const song = getSong();
-    res.send(song);
+    res.send(getSong());
 })
 
 export default router;

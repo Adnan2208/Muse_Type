@@ -1,7 +1,7 @@
-import song, {Song} from "../RandomSongPicker.js"
+import RandomSongPickerFunction, {Song} from "../RandomSongPicker.js"
 
 function getSong() : Song{
-    return song;
+    return RandomSongPickerFunction();
 }
 
 export default getSong;
