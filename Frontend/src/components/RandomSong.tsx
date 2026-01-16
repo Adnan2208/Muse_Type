@@ -18,7 +18,7 @@ const actualSong = totalSong?.slice(0,totalSong.lastIndexOf(" "))
 return(
   <>
     <div className="flex items-center">
-      <div className="px-16 py-8 flex items-center text-gray-700 font-mono text-2xl max-w-5xl w-full text-center leading-relaxed rounded-2xl shadow-lg mx-auto">
+      <div className="px-16 py-8 flex items-center text-gray-700 font-mono text-2xl max-w-5xl w-full text-center leading-relaxed rounded-2xl shadow-lg mx-auto bg-orange-50">
         {
           actualSong
         }
