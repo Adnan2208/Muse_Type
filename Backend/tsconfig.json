@@ -1,10 +1,17 @@
 {
-    "extends": "@tsconfig/node24/tsconfig.json",
-    "compilerOptions": {
-        "strict": true,
-        "resolveJsonModule": true,
-        "module": "nodenext",
-        "outDir": "./dist",
-        "rootDir": "./src"
-    }
+  "extends": "@tsconfig/node24/tsconfig.json",
+  "compilerOptions": {
+    "strict": true,
+
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    "resolveJsonModule": true,
+
+    "outDir": "./dist",
+    "rootDir": "./src"
+  }
 }
