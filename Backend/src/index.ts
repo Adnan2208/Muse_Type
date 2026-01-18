@@ -1,5 +1,8 @@
-import express,{ Application } from "express"
-import cors,{CorsOptions} from "cors"
+import express from "express";
+import type { Application } from "express";
+
+import cors from "cors";
+import type { CorsOptions } from "cors";
 import router from "./routes/getSongRoute.js";
 
 const app: Application = express()

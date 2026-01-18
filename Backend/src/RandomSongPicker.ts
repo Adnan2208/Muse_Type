@@ -1,4 +1,4 @@
-import Allsongs from "../dataExtraction/AllSongs.json" with {type : "json"}
+import Allsongs from "../dataExtraction/AllSongs.json" with { type: "json" };
 
 const AllSongsLength = Allsongs.length;
 export type Song = {
