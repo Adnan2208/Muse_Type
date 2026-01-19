@@ -35,13 +35,13 @@ function checkIfCorrect(e : React.KeyboardEvent){
 return(
   <>
     <section className="flex items-center">
-      <div className="py-8 px-16 flex text-black font-mono text-2xl max-w-5xl w-full leading-relaxed rounded-2xl shadow-lg mx-auto bg-orange-50 items-start gap-0 outline-none border-0 flex-wrap whitespace-pre" onKeyDown={(e) => checkIfCorrect(e)} tabIndex={0} ref={divRef}>
+      <div className="py-8 px-16 flex text-slate-700 font-mono text-2xl max-w-5xl w-full leading-relaxed rounded-2xl shadow-lg mx-auto items-start gap-0 outline-none border-0 flex-wrap whitespace-pre bg-transparent" onKeyDown={(e) => checkIfCorrect(e)} tabIndex={0} ref={divRef}>
 
         {
           actualSong?.split("").map((char, index) => {
             let colorClass = "";
             if (index < i) {
-              colorClass = isRight[index] ? 'text-green-400' : 'text-red-400';
+              colorClass = isRight[index] ? 'text-white' : 'text-red-600';
             }
 
             if (index === i) {

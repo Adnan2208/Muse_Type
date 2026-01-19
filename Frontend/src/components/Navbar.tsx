@@ -25,17 +25,17 @@ function Navbar(){
 
     return(
     <div className="px-5">
-    <header className="flex flex-row p-4 mb-2 justify-between items-center shadow-md rounded-xl shadow-gray-500 bg-linear-to-br from-amber-50 to-orange-100 overflow-hidden">
-        <h1 className="font-bold text-gray-700 text-xl tw" ref={h1Ref}></h1>
+    <header className="flex flex-row p-4 mb-2 justify-between items-center shadow-md rounded-xl shadow-gray-500 bg-black overflow-hidden">
+        <h1 className="font-bold text-emerald-600 text-xl tw" ref={h1Ref}></h1>
         <div className="flex flex-row items-center justify-end">
-        <a href="https://github.com/Adnan2208">
-            <img src="../assets/github.png" alt="Github" className="w-8 h-8 mx-2"/>
+        <a href="https://github.com/Adnan2208" className="p-2 rounded">
+            <img src="../public/github.png" alt="Github" className="bg-emerald-600 w-8 h-8 mx-2"/>
         </a>
-        <a href="https://linkedin.in/adnanchherawala/">
-            <img src="../assets/linkedin.png" alt="Linked" className="w-8 h-8 "/>
+        <a href="https://linkedin.in/adnanchherawala/" className="p-2 rounded">
+            <img src="../public/linkedin.png" alt="Linked" className="bg-emerald-600 w-8 h-8 "/>
         </a>
-        <a href="https://x.com/Adnan_twt1">
-            <img src="../assets/twitter.png" alt="Twitter" className="w-8 h-8 mx-2"/>
+        <a href="https://x.com/Adnan_twt1" className="p-2 rounded">
+            <img src="../public/twitter.png" alt="Twitter" className="bg-emerald-600 w-8 h-8 mx-2"/>
         </a>
         </div>
     </header>
