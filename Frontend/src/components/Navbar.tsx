@@ -29,13 +29,13 @@ function Navbar(){
         <h1 className="font-bold text-emerald-600 text-xl tw" ref={h1Ref}></h1>
         <div className="flex flex-row items-center justify-end">
         <a href="https://github.com/Adnan2208" className="p-2 rounded">
-            <img src="../public/github.png" alt="Github" className="bg-emerald-600 w-8 h-8 mx-2"/>
+            <img src="/github.png" alt="Github" className="bg-emerald-600 w-8 h-8 mx-2"/>
         </a>
         <a href="https://linkedin.in/adnanchherawala/" className="p-2 rounded">
-            <img src="../public/linkedin.png" alt="Linked" className="bg-emerald-600 w-8 h-8 "/>
+            <img src="/linkedin.png" alt="Linked" className="bg-emerald-600 w-8 h-8 "/>
         </a>
         <a href="https://x.com/Adnan_twt1" className="p-2 rounded">
-            <img src="../public/twitter.png" alt="Twitter" className="bg-emerald-600 w-8 h-8 mx-2"/>
+            <img src="/twitter.png" alt="Twitter" className="bg-emerald-600 w-8 h-8 mx-2"/>
         </a>
         </div>
     </header>

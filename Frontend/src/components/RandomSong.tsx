@@ -35,8 +35,18 @@ function checkIfCorrect(e : React.KeyboardEvent){
 return(
   <>
     <section className="flex items-center">
-      <div className="py-8 px-16 flex text-slate-700 font-mono text-2xl max-w-5xl w-full leading-relaxed rounded-2xl shadow-lg mx-auto items-start gap-0 outline-none border-0 flex-wrap whitespace-pre bg-transparent" onKeyDown={(e) => checkIfCorrect(e)} tabIndex={0} ref={divRef}>
-
+    <div
+    className="
+      fixed top-1/2 left-1/2
+      -translate-x-1/2 -translate-y-1/2
+      py-8 px-16 flex text-slate-700 font-mono text-2xl
+      max-w-5xl w-full leading-relaxed rounded-2xl
+      shadow-lg items-start gap-0 outline-none border-0
+      flex-wrap whitespace-pre bg-transparent
+    "
+    onKeyDown={(e) => checkIfCorrect(e)}
+    tabIndex={0}
+    ref={divRef}>
         {
           actualSong?.split("").map((char, index) => {
             let colorClass = "";
