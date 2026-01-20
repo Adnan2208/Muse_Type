@@ -8,6 +8,11 @@ const [i, setI] = useState<number>(0)
 const [isRight,setIsRight] = useState<boolean[]>([])
 const divRef = useRef<HTMLDivElement>(null)
 
+// Variables for timer logic.
+const [time,setTime] = useState<number>(15);
+const timerStartedRef = useRef<boolean>(false);
+const intervalRef = useRef<number | null>(null);
+
 useEffect(() => {
     const fetchSong = async () => {
       const song : Song = await getSong();
@@ -15,14 +20,40 @@ useEffect(() => {
     }
     fetchSong();
     divRef.current?.focus();
+
+    return(() => {
+      if(intervalRef.current){
+        clearInterval(intervalRef.current)
+      }
+    })
   },[])
 
 
 const totalSong = songState?.Lyric.slice(0,600)
 const actualSong = totalSong?.slice(0,totalSong.lastIndexOf(" "))
 
+const correctCount = isRight.filter(Boolean).length;
+const wrongCount = correctCount - isRight.length;
 
 function checkIfCorrect(e : React.KeyboardEvent){
+
+if (!timerStartedRef.current) {
+    timerStartedRef.current = true;
+    
+    intervalRef.current = setInterval(() => {
+      setTime((prevTime) => {
+        if (prevTime <= 1) {
+          // Clear interval when time reaches 0
+          if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+          }
+          return 0;
+        }
+        return prevTime - 1;
+      });
+    }, 1000);
+  }
+
   const key = e.key;
   if (key === actualSong?.[i]) {
     setIsRight((prev) => prev.concat(true));
@@ -48,6 +79,8 @@ return(
     tabIndex={0}
     ref={divRef}>
         {
+          (time == 0 ) ? "hello" 
+          : 
           actualSong?.split("").map((char, index) => {
             let colorClass = "";
             if (index < i) {
@@ -67,7 +100,6 @@ return(
             )
           })
         }
-
       </div>
     </section>
   </>

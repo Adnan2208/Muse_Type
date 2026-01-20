@@ -3,8 +3,6 @@ import RandomSong from "./components/RandomSong";
 
 function App(){
 
-
-
   return (
     <div className="min-h-screen w-full bg-black relative">
       {/* Emerald-600 Basic Grid Background */}
