@@ -1,5 +1,6 @@
 import getSong,{type Song} from "../axios";
 import { useEffect,useState,useRef } from "react";
+import Analytics from "./Analytics";
 
 function RandomSong(){
 
@@ -75,11 +76,12 @@ return(
       shadow-lg items-start gap-0 outline-none border-0
       flex-wrap whitespace-pre bg-transparent
     "
-    onKeyDown={(e) => checkIfCorrect(e)}
+    onKeyDown={time=== 0 ? undefined : (e) => checkIfCorrect(e)}
     tabIndex={0}
     ref={divRef}>
         {
-          (time == 0 ) ? "hello" 
+          /* Once time == 0 make sure that onClick() cannot take place so count remains unchanged. */
+          (time == 0 ) ?  <Analytics correctCount = {correctCount} wrongCount = {wrongCount} />
           : 
           actualSong?.split("").map((char, index) => {
             let colorClass = "";
