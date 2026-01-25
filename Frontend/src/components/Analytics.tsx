@@ -2,10 +2,11 @@ import { maxTime } from "./RandomSong";
 
 interface countInterface{
     correctCount : number,
-    wrongCount : number
+    wrongCount : number,
+    onReset : () => void
 }
 
-function Analytics({correctCount,wrongCount} : countInterface){
+function Analytics({correctCount,wrongCount,onReset} : countInterface){
     const totalCount = correctCount + wrongCount;
     const correctPercentage = totalCount > 0 ? Math.round(((correctCount / totalCount) * 100)) : 0
     const wrongPercentage = 100 - correctPercentage
@@ -31,7 +32,7 @@ function Analytics({correctCount,wrongCount} : countInterface){
                 <div className="text-slate-400 text-sm">WPM</div>
             </div>
         </section>
-        <button className="text-white bg-black p-2 border border-emerald-500/20 rounded-xl m-3 cursor-pointer">Reset</button>
+        <button onClick={onReset} className="text-white bg-black p-2 border border-emerald-500/20 rounded-xl m-3 cursor-pointer hover:border-emerald-600">Reset</button>
         </div>
     )
 }

@@ -16,6 +16,27 @@ const [time,setTime] = useState<number>(maxTime);
 const timerStartedRef = useRef<boolean>(false);
 const intervalRef = useRef<number | null>(null);
 
+async function reset() : Promise<void>{
+  // Reset all states
+  setI(0);
+  setIsRight([]);
+  setTime(maxTime);
+  timerStartedRef.current = false;
+  
+  // Clear interval if running
+  if(intervalRef.current){
+    clearInterval(intervalRef.current);
+    intervalRef.current = null;
+  }
+  
+  // Fetch new song
+  const song : Song = await getSong();
+  setSongState(song);
+  
+  // Refocus on div
+  divRef.current?.focus();
+}
+
 useEffect(() => {
     const fetchSong = async () => {
       const song : Song = await getSong();
@@ -81,7 +102,7 @@ return(
     tabIndex={0}
     ref={divRef}>
         {
-          (time == 0 ) ?  <Analytics correctCount = {correctCount} wrongCount = {wrongCount} />
+          (time == 0 ) ?  <Analytics correctCount = {correctCount} wrongCount = {wrongCount} onReset={reset} />
           : 
           actualSong?.split("").map((char, index) => {
             let colorClass = "";
