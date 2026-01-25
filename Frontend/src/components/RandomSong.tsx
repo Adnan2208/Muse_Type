@@ -1,5 +1,8 @@
 import getSong,{type Song} from "../axios";
 import { useEffect,useState,useRef } from "react";
+import Analytics from "./Analytics";
+
+export const maxTime = 15;
 
 function RandomSong(){
 
@@ -9,9 +12,30 @@ const [isRight,setIsRight] = useState<boolean[]>([])
 const divRef = useRef<HTMLDivElement>(null)
 
 // Variables for timer logic.
-const [time,setTime] = useState<number>(15);
+const [time,setTime] = useState<number>(maxTime);
 const timerStartedRef = useRef<boolean>(false);
 const intervalRef = useRef<number | null>(null);
+
+async function reset() : Promise<void>{
+  // Reset all states
+  setI(0);
+  setIsRight([]);
+  setTime(maxTime);
+  timerStartedRef.current = false;
+  
+  // Clear interval if running
+  if(intervalRef.current){
+    clearInterval(intervalRef.current);
+    intervalRef.current = null;
+  }
+  
+  // Fetch new song
+  const song : Song = await getSong();
+  setSongState(song);
+  
+  // Refocus on div
+  divRef.current?.focus();
+}
 
 useEffect(() => {
     const fetchSong = async () => {
@@ -28,12 +52,13 @@ useEffect(() => {
     })
   },[])
 
-
-const totalSong = songState?.Lyric.slice(0,600)
+// Variables for song logic 
+const songCharLimit = 600;
+const totalSong = songState?.Lyric.slice(0,songCharLimit);
 const actualSong = totalSong?.slice(0,totalSong.lastIndexOf(" "))
 
 const correctCount = isRight.filter(Boolean).length;
-const wrongCount = correctCount - isRight.length;
+const wrongCount = isRight.length - correctCount;
 
 function checkIfCorrect(e : React.KeyboardEvent){
 
@@ -65,21 +90,19 @@ if (!timerStartedRef.current) {
 
 return(
   <>
-    <section className="flex items-center">
+    <section className="flex items-center justify-center h-[calc(100vh-100px)] px-5">
     <div
     className="
-      fixed top-1/2 left-1/2
-      -translate-x-1/2 -translate-y-1/2
       py-8 px-16 flex text-slate-700 font-mono text-2xl
-      max-w-5xl w-full leading-relaxed rounded-2xl
-      shadow-lg items-start gap-0 outline-none border-0
+      max-w-5xl w-full leading-relaxed rounded-xl
+       items-start gap-0 outline-none border-0
       flex-wrap whitespace-pre bg-transparent
     "
-    onKeyDown={(e) => checkIfCorrect(e)}
+    onKeyDown={time=== 0 ? undefined : (e) => checkIfCorrect(e)}
     tabIndex={0}
     ref={divRef}>
         {
-          (time == 0 ) ? "hello" 
+          (time == 0 ) ?  <Analytics correctCount = {correctCount} wrongCount = {wrongCount} onReset={reset} />
           : 
           actualSong?.split("").map((char, index) => {
             let colorClass = "";
