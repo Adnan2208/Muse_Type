@@ -84,59 +84,58 @@ function RandomSong() {
 
   return (
     <>
-      <section className="flex flex-col items-center justify-center min-h-[calc(100vh-100px)] px-4 py-8 gap-6">
+      <section className="flex-1 min-h-0 flex flex-col items-center justify-center px-4 py-4 md:py-6 gap-4 overflow-hidden">
         
         {/* Top HUD */}
         {time > 0 && actualSong && (
-          <div className="flex items-center gap-6 animate-[fadeIn_0.5s_ease-out]">
+          <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 animate-[fadeIn_0.5s_ease-out] shrink-0">
             {/* Timer Pill */}
             <div className={`
-              flex items-center gap-3 px-6 py-3 rounded-full 
+              flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 rounded-full 
               bg-white/5 backdrop-blur-md border ${timerBorder}
               shadow-lg transition-colors duration-500
             `}>
-              <svg className={`w-5 h-5 ${timerColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className={`w-4 h-4 md:w-5 md:h-5 ${timerColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <span className={`text-2xl font-mono font-bold ${timerColor} tabular-nums`}>
+              <span className={`text-xl md:text-2xl font-mono font-bold ${timerColor} tabular-nums`}>
                 {time}s
               </span>
             </div>
 
             {/* Progress Pill */}
-            <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 backdrop-blur-md border border-white/10 shadow-lg">
-              <span className="text-slate-400 text-sm font-medium">Progress</span>
-              <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
+            <div className="flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 rounded-full bg-white/5 backdrop-blur-md border border-white/10 shadow-lg">
+              <span className="text-slate-400 text-xs md:text-sm font-medium">Progress</span>
+              <div className="w-24 md:w-32 h-1.5 md:h-2 bg-white/10 rounded-full overflow-hidden">
                 <div 
                   className="h-full bg-gradient-to-r from-emerald-400 to-cyan-400 transition-all duration-300 ease-out"
                   style={{ width: `${progress}%` }}
                 />
               </div>
-              <span className="text-slate-300 text-sm font-mono tabular-nums">{Math.round(progress)}%</span>
+              <span className="text-slate-300 text-xs md:text-sm font-mono tabular-nums">{Math.round(progress)}%</span>
             </div>
           </div>
         )}
 
-        {/* Main Typing Area */}
+        {/* Main Card */}
         <div
           className={`
-            relative max-w-5xl w-full rounded-3xl overflow-hidden
-            transition-all duration-500
+            relative flex-1 min-h-0 w-full max-w-5xl rounded-2xl md:rounded-3xl overflow-hidden
             ${time === 0 
               ? 'bg-transparent border-0 shadow-none' 
               : 'bg-black/40 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50'
             }
           `}
         >
-          {/* Subtle top gradient line */}
-          {time !== 0 && <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />}
+          {time !== 0 && <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent z-20" />}
           
           <div
             className={`
-              py-12 px-8 md:px-16 flex text-slate-600 font-mono text-xl md:text-2xl
+              h-full overflow-y-auto [&::-webkit-scrollbar]:hidden [scrollbar-width:none]
+              py-6 px-4 md:py-10 md:px-12 lg:px-16 flex font-mono text-lg md:text-xl lg:text-2xl
               w-full leading-relaxed items-start gap-0 outline-none border-0
-              flex-wrap whitespace-pre bg-transparent relative z-10
-              ${time === 0 ? 'justify-center items-center min-h-[400px]' : 'min-h-[300px]'}
+              flex-wrap bg-transparent relative z-10
+              ${time === 0 ? 'justify-center items-center' : 'text-slate-600'}
             `}
             onKeyDown={time === 0 ? undefined : (e) => checkIfCorrect(e)}
             tabIndex={0}
@@ -184,7 +183,7 @@ function RandomSong() {
 
         {/* Footer hint */}
         {time !== 0 && (
-          <p className="text-slate-500 text-sm animate-pulse">
+          <p className="text-slate-500 text-xs md:text-sm animate-pulse shrink-0">
             Click the text area and start typing to begin
           </p>
         )}

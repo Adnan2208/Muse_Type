@@ -3,14 +3,14 @@ import RandomSong from "./components/RandomSong";
 
 function App() {
   return (
-    <div className="min-h-screen w-full bg-slate-950 relative overflow-hidden selection:bg-emerald-500/30">
+    <div className="h-screen w-full bg-slate-950 relative overflow-hidden flex flex-col selection:bg-emerald-500/30">
       {/* Ambient background glow */}
-      <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[120px] animate-pulse" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[120px] animate-pulse pointer-events-none" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[100px] animate-pulse pointer-events-none" style={{ animationDelay: '2s' }} />
       
       {/* Subtle grid overlay */}
       <div
-        className="absolute inset-0 z-0 opacity-30"
+        className="absolute inset-0 z-0 opacity-30 pointer-events-none"
         style={{
           backgroundImage: `
             linear-gradient(to right, rgba(16, 185, 129, 0.15) 1px, transparent 1px),
@@ -22,7 +22,7 @@ function App() {
         }}
       />
 
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col h-full">
         <Navbar />
         <RandomSong />
       </div>
