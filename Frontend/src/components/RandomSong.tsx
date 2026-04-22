@@ -5,49 +5,52 @@ import Analytics from "./Analytics";
 export const maxTime = 15;
 
 function RandomSong() {
-  const [songState, setSongState] = useState<null | Song>();
-  const [i, setI] = useState<number>(0);
-  const [isRight, setIsRight] = useState<boolean[]>([]);
-  const divRef = useRef<HTMLDivElement>(null);
+const [songState, setSongState] = useState<null | Song>(null);
+const [i, setI] = useState<number>(0);
+const [isRight, setIsRight] = useState<boolean[]>([]);
+const divRef = useRef<HTMLDivElement>(null);
+const songRef = useRef<Song | null>(null);
 
   const [time, setTime] = useState<number>(maxTime);
   const timerStartedRef = useRef<boolean>(false);
   const intervalRef = useRef<number | null>(null);
 
-  async function reset(): Promise<void> {
-    setI(0);
-    setIsRight([]);
-    setTime(maxTime);
-    timerStartedRef.current = false;
+async function reset(): Promise<void> {
+setI(0);
+setIsRight([]);
+setTime(maxTime);
+timerStartedRef.current = false;
 
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
+if (intervalRef.current) {
+clearInterval(intervalRef.current);
+intervalRef.current = null;
+}
 
-    const song: Song = await getSong();
-    setSongState(song);
-    divRef.current?.focus();
-  }
+const song: Song = await getSong();
+songRef.current = song;
+setSongState(song);
+divRef.current?.focus();
+}
 
-  useEffect(() => {
-    const fetchSong = async () => {
-      const song: Song = await getSong();
-      setSongState(song);
-    };
-    fetchSong();
-    divRef.current?.focus();
+useEffect(() => {
+const fetchSong = async () => {
+const song: Song = await getSong();
+songRef.current = song;
+setSongState(song);
+};
+fetchSong();
+divRef.current?.focus();
 
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, []);
+return () => {
+if (intervalRef.current) {
+clearInterval(intervalRef.current);
+}
+};
+}, []);
 
   const songCharLimit = 600;
   const totalSong = songState?.Lyric.slice(0, songCharLimit);
-  const actualSong = totalSong?.slice(0, totalSong.lastIndexOf(" "));
+  const actualSong = totalSong;
 
   const correctCount = isRight.filter(Boolean).length;
   const wrongCount = isRight.length - correctCount;
@@ -162,20 +165,20 @@ function RandomSong() {
                         ┃
                       </span>
                       <span className={`${colorClass} transition-all duration-150 ml-[8px]`}>
-                        {char}
+                        {char === " " ? "\u00A0" : char}
                       </span>
                     </span>
                   );
                 }
 
-                return (
-                  <span 
-                    key={index} 
-                    className={`${colorClass} ${transformClass} transition-colors duration-150`}
-                  >
-                    {char}
-                  </span>
-                );
+return (
+<span
+key={index}
+className={`${colorClass} ${transformClass} transition-colors duration-150`}
+>
+{char === " " ? "\u00A0" : char}
+</span>
+);
               })
             )}
           </div>
